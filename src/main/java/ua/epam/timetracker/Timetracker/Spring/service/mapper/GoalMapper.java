@@ -9,12 +9,13 @@ import ua.epam.timetracker.Timetracker.Spring.entity.goal.GoalEntity;
 @Component
 public class GoalMapper {
     public GoalEntity mapGoalToGoalEntity(Goal domain) {
-        return GoalEntity.builder()
-                .name(domain.getName())
-                .backlog(BacklogEntity.builder()
-                        .id(domain.getBacklog().getId())
-                        .build())
-                .build();
+//        return GoalEntity.builder()
+//                .name(domain.getName())
+//                .backlog(BacklogEntity.builder()
+//                        .id(domain.getBacklog().getId())
+//                        .build())
+//                .build();
+        return new GoalEntity(domain.getName(),new BacklogEntity(domain.getBacklog().getId()));
     }
 
     public Goal mapGoalEntityToGoal(GoalEntity entity) {

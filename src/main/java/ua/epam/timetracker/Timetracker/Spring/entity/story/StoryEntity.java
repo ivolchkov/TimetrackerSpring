@@ -1,6 +1,5 @@
 package ua.epam.timetracker.Timetracker.Spring.entity.story;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.epam.timetracker.Timetracker.Spring.domain.story.Status;
@@ -12,7 +11,6 @@ import javax.persistence.*;
 import java.time.LocalTime;
 
 @Data
-@Builder
 @NoArgsConstructor
 @Entity
 @Table(name = "stories")
@@ -22,20 +20,20 @@ public class StoryEntity {
     @Column(name = "story_id")
     private Integer id;
 
-    @Column(name = "story_name")
+    @Column(name = "story_name", nullable = false, length = 45)
     private String name;
 
-    @Column(name = "story_spent_time")
+    @Column(name = "story_spent_time", nullable = false)
     private LocalTime spentTime;
 
-    @Column(name = "story_status")
+    @Column(name = "story_status", nullable = false)
     private Status status;
 
-    @Column(name = "story_description")
+    @Column(name = "story_description", length = 1000)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "goal_id")
+    @JoinColumn(name = "goal_id", nullable = false)
     private GoalEntity goal;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -45,4 +43,20 @@ public class StoryEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sprint_id")
     private SprintEntity sprint;
+
+    public StoryEntity(String name, LocalTime spentTime, Status status, GoalEntity goal) {
+        this.name = name;
+        this.spentTime = spentTime;
+        this.status = status;
+        this.goal = goal;
+    }
+
+    public StoryEntity(Integer id, SprintEntity sprint) {
+        this.id = id;
+        this.sprint = sprint;
+    }
+
+    public StoryEntity(Integer id, UserEntity user) {
+        this.id = id;
+    }
 }

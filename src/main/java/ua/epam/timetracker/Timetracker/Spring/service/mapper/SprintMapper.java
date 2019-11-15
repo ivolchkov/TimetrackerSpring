@@ -8,12 +8,13 @@ import ua.epam.timetracker.Timetracker.Spring.entity.sprint.SprintEntity;
 @Component
 public class SprintMapper {
     public SprintEntity mapSprintToSprintEntity(Sprint domain) {
-        return SprintEntity.builder()
-                .name(domain.getName())
-                .start(domain.getStart())
-                .end(domain.getEnd())
-                .description(domain.getDescription())
-                .build();
+//        return SprintEntity.builder()
+//                .name(domain.getName())
+//                .start(domain.getStart())
+//                .end(domain.getEnd())
+//                .description(domain.getDescription())
+//                .build();
+        return new SprintEntity(domain.getName(), domain.getStart(), domain.getEnd(), domain.getDescription());
     }
 
     public Sprint mapSprintEntityToSprint(SprintEntity entity) {

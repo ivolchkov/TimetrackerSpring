@@ -14,11 +14,11 @@ public class User {
     private final Integer id;
 
     @NotEmpty(message = "Please provide user name")
-    @Pattern(regexp = "([A-Z])([a-z]{1,12})")
+    @Pattern(regexp = "([A-Z])([a-z]{1,12})|([А-Я]([a-я]{1,12}))")
     private final String name;
 
     @NotEmpty(message = "Please provide user surname")
-    @Pattern(regexp = "([A-Z])([a-z]{1,12})")
+    @Pattern(regexp = "([A-Z])([a-z]{1,12})|([А-Я]([a-я]{1,12}))")
     private final String surname;
 
     @Email(message = "Please provide a valid Email")
