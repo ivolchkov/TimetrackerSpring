@@ -2,8 +2,8 @@ package ua.epam.timetracker.Timetracker.Spring.service.mapper;
 
 
 import org.springframework.stereotype.Component;
-import ua.epam.timetracker.Timetracker.Spring.domain.sprint.Sprint;
-import ua.epam.timetracker.Timetracker.Spring.entity.sprint.SprintEntity;
+import ua.epam.timetracker.Timetracker.Spring.domain.Sprint;
+import ua.epam.timetracker.Timetracker.Spring.entity.SprintEntity;
 
 @Component
 public class SprintMapper {

@@ -1,8 +1,8 @@
 package ua.epam.timetracker.Timetracker.Spring.service.mapper;
 
 import org.springframework.stereotype.Component;
-import ua.epam.timetracker.Timetracker.Spring.domain.backlog.Backlog;
-import ua.epam.timetracker.Timetracker.Spring.entity.backlog.BacklogEntity;
+import ua.epam.timetracker.Timetracker.Spring.domain.Backlog;
+import ua.epam.timetracker.Timetracker.Spring.entity.BacklogEntity;
 
 @Component
 public class BacklogMapper {

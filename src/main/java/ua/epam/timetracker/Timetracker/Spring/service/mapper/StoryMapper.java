@@ -1,14 +1,14 @@
 package ua.epam.timetracker.Timetracker.Spring.service.mapper;
 
 import org.springframework.stereotype.Component;
-import ua.epam.timetracker.Timetracker.Spring.domain.goal.Goal;
-import ua.epam.timetracker.Timetracker.Spring.domain.sprint.Sprint;
-import ua.epam.timetracker.Timetracker.Spring.domain.story.Story;
-import ua.epam.timetracker.Timetracker.Spring.domain.user.User;
-import ua.epam.timetracker.Timetracker.Spring.entity.goal.GoalEntity;
-import ua.epam.timetracker.Timetracker.Spring.entity.sprint.SprintEntity;
-import ua.epam.timetracker.Timetracker.Spring.entity.story.StoryEntity;
-import ua.epam.timetracker.Timetracker.Spring.entity.user.UserEntity;
+import ua.epam.timetracker.Timetracker.Spring.domain.Goal;
+import ua.epam.timetracker.Timetracker.Spring.domain.Sprint;
+import ua.epam.timetracker.Timetracker.Spring.domain.Story;
+import ua.epam.timetracker.Timetracker.Spring.domain.User;
+import ua.epam.timetracker.Timetracker.Spring.entity.GoalEntity;
+import ua.epam.timetracker.Timetracker.Spring.entity.SprintEntity;
+import ua.epam.timetracker.Timetracker.Spring.entity.StoryEntity;
+import ua.epam.timetracker.Timetracker.Spring.entity.UserEntity;
 
 @Component
 public class StoryMapper {

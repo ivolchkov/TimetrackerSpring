@@ -1,10 +1,10 @@
 package ua.epam.timetracker.Timetracker.Spring.service.mapper;
 
 import org.springframework.stereotype.Component;
-import ua.epam.timetracker.Timetracker.Spring.domain.backlog.Backlog;
-import ua.epam.timetracker.Timetracker.Spring.domain.user.User;
-import ua.epam.timetracker.Timetracker.Spring.entity.backlog.BacklogEntity;
-import ua.epam.timetracker.Timetracker.Spring.entity.user.UserEntity;
+import ua.epam.timetracker.Timetracker.Spring.domain.Backlog;
+import ua.epam.timetracker.Timetracker.Spring.domain.User;
+import ua.epam.timetracker.Timetracker.Spring.entity.BacklogEntity;
+import ua.epam.timetracker.Timetracker.Spring.entity.UserEntity;
 
 @Component
 public class UserMapper {

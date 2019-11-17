@@ -2,13 +2,12 @@ package ua.epam.timetracker.Timetracker.Spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ua.epam.timetracker.Timetracker.Spring.domain.user.User;
-import ua.epam.timetracker.Timetracker.Spring.service.user.UserService;
+import ua.epam.timetracker.Timetracker.Spring.domain.User;
+import ua.epam.timetracker.Timetracker.Spring.service.UserService;
 
 import javax.validation.Valid;
 
@@ -31,7 +30,14 @@ public class UserController {
     @GetMapping(value = {"/login"})
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("sign-in");
+        return modelAndView;
+    }
+
+    @GetMapping(value = {"/register"})
+    public ModelAndView register() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register");
         return modelAndView;
     }
 
