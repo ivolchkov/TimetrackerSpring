@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService {
         }
 
         String encoded = encoder.encode(user.getPassword());
-        User userWithEncodedPass = new User(user, encoded);
+        user.setPassword(encoded);
 
-        UserEntity entity = userRepository.save(mapper.mapUserToUserEntity(userWithEncodedPass));
+        UserEntity entity = userRepository.save(mapper.mapUserToUserEntity(user));
 
         return mapper.mapUserEntityToUser(entity);
     }

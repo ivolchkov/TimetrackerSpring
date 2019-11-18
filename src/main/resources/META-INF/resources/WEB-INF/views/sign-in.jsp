@@ -44,7 +44,7 @@
     <link href="css/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
-<form class="form-signin" name = "loginForm" method="POST" action="signIn" >
+<form class="form-signin" name = "loginForm" method="POST" action="/signIn" >
     <img class="mb-4" src="img/t-letter.png" alt="" width="100" height="100">
     <h1 class="h3 mb-3 font-weight-normal"><fmt:message key="signIn.introduce"/></h1>
     <label for="inputEmail" class="sr-only">Email</label>

@@ -1,11 +1,14 @@
 package ua.epam.timetracker.Timetracker.Spring.domain;
 
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -27,17 +30,17 @@ public class User {
 
     @Pattern(regexp = "(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}")
     @NotEmpty(message = "Please provide user password")
-    private final String password;
+    @Setter(AccessLevel.PUBLIC) private String password;
 
-    @NotEmpty(message = "Please provide user role")
+    @NotNull(message = "Please provide user role")
     private final Role role;
 
-    public User(User user, String password) {
-        this.id = null;
-        this.name = user.name;
-        this.surname = user.surname;
-        this.email = user.email;
-        this.password = password;
-        this.role = user.role;
-    }
+//    public User(User user, String password) {
+//        this.id = null;
+//        this.name = user.name;
+//        this.surname = user.surname;
+//        this.email = user.email;
+//        this.password = password;
+//        this.role = user.role;
+//    }
 }

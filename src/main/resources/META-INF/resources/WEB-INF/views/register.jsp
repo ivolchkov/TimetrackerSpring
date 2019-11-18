@@ -60,7 +60,7 @@
 </head>
 <body>
 <div class="container" style="padding-top:3%;">
-    <form class="form-horizontal" role="form" action="signUp" method="post">
+    <form class="form-horizontal" role="form" action="/signUp" method="post">
         <h2><fmt:message key="registration.start"/></h2>
         <div class="form-group">
             <label for="firstName" class="col-sm-3 control-label" ><fmt:message key="registration.name"/></label>

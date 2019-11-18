@@ -5,11 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import ua.epam.timetracker.Timetracker.Spring.domain.Role;
 import ua.epam.timetracker.Timetracker.Spring.domain.User;
 import ua.epam.timetracker.Timetracker.Spring.service.UserService;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 @Controller
 public class UserController {
@@ -21,43 +22,77 @@ public class UserController {
     }
 
     @GetMapping(value = {"/index"})
-    public ModelAndView main() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        return modelAndView;
+    public String main() {
+        return "index";
     }
 
-    @GetMapping(value = {"/login"})
-    public ModelAndView login() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("sign-in");
-        return modelAndView;
+    @GetMapping("/login")
+    public String login() {
+        return "sign-in";
     }
 
-    @GetMapping(value = {"/register"})
-    public ModelAndView register() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register");
-        return modelAndView;
+    @GetMapping("/register")
+    public String register() {
+        return "register";
     }
 
     @PostMapping("/signUp")
-    public String signUp(@Valid User user, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "add-user";
-//        }
+    public String signUp(HttpServletRequest request, BindingResult result) {
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String repeatedPassword = request.getParameter("repeatedPassword");
+        Role role = Role.valueOf(request.getParameter("role"));
+
+        if (!Objects.equals(password, repeatedPassword)) {
+            return "register.jsp";
+        }
+
+        User user = User.builder()
+                .name(name)
+                .surname(surname)
+                .email(email)
+                .password(password)
+                .role(role)
+                .build();
 
         userService.register(user);
+
         return "index";
     }
 
     @PostMapping("/signIn")
-    public String signIn(@Valid User user, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "add-user";
-//        }
+    public String signIn(HttpServletRequest request, BindingResult result) {
+        String page;
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
-        userService.login(user.getEmail(), user.getPassword());
+        User user = userService.login(email, password);
+        request.getSession().setAttribute("user", user);
+        Role role = user.getRole();
+
+        switch (role) {
+            case ADMIN:
+                page = "admin-service";
+                break;
+            case DEVELOPER:
+                page = "developer-service";
+                break;
+            case SCRUM_MASTER:
+                page = "scrum-master-service";
+                break;
+            default:
+                page = "index";
+        }
+
+        return page;
+    }
+
+    @GetMapping("/signOut")
+    public String signOut(HttpServletRequest request) {
+        request.getSession().invalidate();
+
         return "index";
     }
 }

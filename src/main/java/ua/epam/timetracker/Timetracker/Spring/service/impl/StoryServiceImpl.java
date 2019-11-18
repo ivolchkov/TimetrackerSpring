@@ -110,7 +110,7 @@ public class StoryServiceImpl implements StoryService {
         paginatingValidation(currentPage, recordsPerPage);
 
         PageRequest pageRequest = PageRequest.of(currentPage, recordsPerPage);
-        Page<StoryEntity> result = storyRepository.findWithoutUserId(pageRequest);
+        Page<StoryEntity> result = storyRepository.findByUserIdIsNull(pageRequest);
 
         return listMapping(result);
     }
@@ -136,14 +136,18 @@ public class StoryServiceImpl implements StoryService {
     public void addStoryToUser(Story story, User user) {
         validateUpdateParam(story, user);
 
-        storyRepository.updateUserId(mapper.mapStoryToStoryEntity(story, user));
+        StoryEntity entity = mapper.mapStoryToStoryEntity(story, user);
+
+        storyRepository.updateUserId(entity.getUser().getId(), entity.getId());
     }
 
     @Override
     public void addStoryToSprint(Story story, Sprint sprint) {
         validateUpdateParam(story, sprint);
 
-        storyRepository.updateSprintId(mapper.mapStoryToStoryEntity(story, sprint));
+        StoryEntity entity = mapper.mapStoryToStoryEntity(story, sprint);
+
+        storyRepository.updateSprintId(entity.getSprint().getId(), entity.getId());
     }
 
     private <T> void validateParam(T param) {
