@@ -48,19 +48,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String email, String password) {
-        String encodedPassword = encoder.encode(password);
         Optional<UserEntity> entity = userRepository.findByEmail(email);
 
         if (!entity.isPresent()) {
             LOGGER.warn("There is no user with this e-mail");
             throw new EntityNotFoundException("There is no user with this e-mail");
+        }
+        if (encoder.matches(password, entity.get().getPassword())) {
+            return mapper.mapUserEntityToUser(entity.get());
         } else {
-            if (entity.get().getPassword().equals(encodedPassword)) {
-                return mapper.mapUserEntityToUser(entity.get());
-            } else {
-                LOGGER.warn("Incorrect password");
-                throw new EntityNotFoundException("Incorrect password");
-            }
+            LOGGER.warn("Incorrect password");
+            throw new EntityNotFoundException("Incorrect password");
         }
     }
 
@@ -82,6 +80,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public long showNumberOfRows() {
-    return userRepository.count();
+        return userRepository.count();
     }
 }

@@ -23,6 +23,7 @@ public class StoryEntity {
     @Column(name = "story_spent_time", nullable = false)
     private LocalTime spentTime;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "story_status", nullable = false)
     private Status status;
 

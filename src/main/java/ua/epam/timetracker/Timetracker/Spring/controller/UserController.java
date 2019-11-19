@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public String signUp(HttpServletRequest request, BindingResult result) {
+    public String signUp(HttpServletRequest request) {
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
@@ -46,7 +46,7 @@ public class UserController {
         Role role = Role.valueOf(request.getParameter("role"));
 
         if (!Objects.equals(password, repeatedPassword)) {
-            return "register.jsp";
+            return "register";
         }
 
         User user = User.builder()
@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @PostMapping("/signIn")
-    public String signIn(HttpServletRequest request, BindingResult result) {
+    public String signIn(HttpServletRequest request) {
         String page;
         String email = request.getParameter("email");
         String password = request.getParameter("password");

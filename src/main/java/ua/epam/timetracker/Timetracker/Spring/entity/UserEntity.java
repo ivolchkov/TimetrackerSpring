@@ -26,9 +26,10 @@ public class UserEntity {
     @Column(name = "user_email", nullable = false, unique = true, length = 320)
     private String email;
 
-    @Column(name = "user_password", nullable = false, length = 45)
+    @Column(name = "user_password", nullable = false, length = 100)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "user_role", nullable = false, length = 45)
     private Role role;
 
