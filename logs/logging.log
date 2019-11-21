@@ -3,3 +3,5 @@ WARN  impl.UserServiceImpl: Method:login() Line:61 - Incorrect password
 WARN  impl.UserServiceImpl: Method:login() Line:61 - Incorrect password
 WARN  impl.UserServiceImpl: Method:login() Line:61 - Incorrect password
 WARN  impl.UserServiceImpl: Method:login() Line:61 - Incorrect password
+ERROR impl.BacklogServiceImpl: Method:showAllBacklogs() Line:67 - Invalid number of current page or records per page
+ERROR impl.StoryServiceImpl: Method:paginatingValidation() Line:158 - Invalid number of current page or records per page

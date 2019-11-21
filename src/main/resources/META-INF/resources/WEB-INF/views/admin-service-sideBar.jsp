@@ -16,37 +16,37 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="admin-service.jsp">
+                <a class="nav-link active" href="admin-service">
                     <span data-feather="home"></span>
                     <fmt:message key="service.admin.sideBar.home"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showProjects&currentPage=1&recordsPerPage=10">
+                <a class="nav-link" href="backlogs?currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.projects"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showGoals&currentPage=1&recordsPerPage=10">
+                <a class="nav-link" href="goals?currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.goals"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showStories&currentPage=1&recordsPerPage=10">
+                <a class="nav-link" href="stories?currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.stories"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showSprints&currentPage=1&recordsPerPage=10">
+                <a class="nav-link" href="sprints?currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.admin.sideBar.sprints"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="admin?command=showUsers&currentPage=1&recordsPerPage=10">
+                <a class="nav-link" href="users?currentPage=1&recordsPerPage=10">
                     <span data-feather="users"></span>
                     <fmt:message key="service.admin.sideBar.users"/>
                 </a>

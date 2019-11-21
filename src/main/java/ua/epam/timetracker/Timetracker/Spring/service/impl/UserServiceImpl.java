@@ -1,6 +1,7 @@
 package ua.epam.timetracker.Timetracker.Spring.service.impl;
 
-import org.apache.log4j.Logger;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,25 +17,18 @@ import ua.epam.timetracker.Timetracker.Spring.service.mapper.UserMapper;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Log4j
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class UserServiceImpl implements UserService {
-    private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
-
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
     private final UserMapper mapper;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder, UserMapper mapper) {
-        this.userRepository = userRepository;
-        this.encoder = encoder;
-        this.mapper = mapper;
-    }
-
     @Override
     public User register(User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            LOGGER.warn("User is already registered by this e-mail");
+            log.warn("User is already registered by this e-mail");
             throw new AlreadyRegisteredException("User is already registered by this e-mail");
         }
 
@@ -51,21 +45,22 @@ public class UserServiceImpl implements UserService {
         Optional<UserEntity> entity = userRepository.findByEmail(email);
 
         if (!entity.isPresent()) {
-            LOGGER.warn("There is no user with this e-mail");
+            log.warn("There is no user with this e-mail");
             throw new EntityNotFoundException("There is no user with this e-mail");
         }
+
         if (encoder.matches(password, entity.get().getPassword())) {
             return mapper.mapUserEntityToUser(entity.get());
-        } else {
-            LOGGER.warn("Incorrect password");
-            throw new EntityNotFoundException("Incorrect password");
         }
+
+        log.warn("Incorrect password");
+        throw new EntityNotFoundException("Incorrect password");
     }
 
     @Override
     public List<User> findAll(Integer currentPage, Integer recordsPerPage) {
-        if (currentPage <= 0 || recordsPerPage <= 0) {
-            LOGGER.error("Invalid number of current page or records per page");
+        if (currentPage < 0 || recordsPerPage < 0) {
+            log.warn("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }
 

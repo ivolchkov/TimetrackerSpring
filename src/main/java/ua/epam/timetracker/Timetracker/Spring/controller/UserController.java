@@ -1,5 +1,6 @@
 package ua.epam.timetracker.Timetracker.Spring.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,16 +13,12 @@ import ua.epam.timetracker.Timetracker.Spring.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Controller
 public class UserController {
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping(value = {"/index"})
+    @GetMapping("/index")
     public String main() {
         return "index";
     }

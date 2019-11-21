@@ -56,5 +56,6 @@ public class StoryEntity {
 
     public StoryEntity(Integer id, UserEntity user) {
         this.id = id;
+        this.user = user;
     }
 }

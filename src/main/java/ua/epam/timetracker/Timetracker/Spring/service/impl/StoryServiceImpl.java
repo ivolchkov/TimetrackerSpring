@@ -1,6 +1,7 @@
 package ua.epam.timetracker.Timetracker.Spring.service.impl;
 
-import org.apache.log4j.Logger;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,23 +23,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Log4j
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class StoryServiceImpl implements StoryService {
-    private static final Logger LOGGER = Logger.getLogger(StoryServiceImpl.class);
-
     private final StoryRepository storyRepository;
     private final StoryMapper mapper;
-
-    @Autowired
-    public StoryServiceImpl(StoryRepository storyRepository, StoryMapper mapper) {
-        this.storyRepository = storyRepository;
-        this.mapper = mapper;
-    }
 
     @Override
     public Story createStory(Story story) {
         if (Objects.isNull(story) ) {
-            LOGGER.warn("Story is not valid");
+            log.warn("Story is not valid");
             throw new InvalidEntityCreation("Story is not valid");
         }
 
@@ -123,7 +118,7 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public long showNumberOfRowsWithoutUser() {
 
-    return storyRepository.countByUserIdIsNotNull();
+    return storyRepository.countByUserIdIsNull();
     }
 
     @Override
@@ -138,7 +133,7 @@ public class StoryServiceImpl implements StoryService {
 
         StoryEntity entity = mapper.mapStoryToStoryEntity(story, user);
 
-        storyRepository.updateUserId(entity.getUser().getId(), entity.getId());
+        storyRepository.updateUserId(entity.getUser(), entity.getId());
     }
 
     @Override
@@ -147,26 +142,26 @@ public class StoryServiceImpl implements StoryService {
 
         StoryEntity entity = mapper.mapStoryToStoryEntity(story, sprint);
 
-        storyRepository.updateSprintId(entity.getSprint().getId(), entity.getId());
+        storyRepository.updateSprintId(entity.getSprint(), entity.getId());
     }
 
     private <T> void validateParam(T param) {
         if (Objects.isNull(param)) {
-            LOGGER.warn("Parameter is not valid");
+            log.warn("Parameter is not valid");
             throw new IllegalArgumentException("Parameter is not valid");
         }
     }
 
     private void paginatingValidation(Integer currentPage, Integer recordsPerPage) {
-        if (currentPage <= 0 || recordsPerPage <= 0) {
-            LOGGER.error("Invalid number of current page or records per page");
+        if (currentPage < 0 || recordsPerPage < 0) {
+            log.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }
     }
 
     private <T> void validateUpdateParam(Story story, T param) {
         if (Objects.isNull(story) || Objects.isNull(param)) {
-            LOGGER.warn("Invalid story updating");
+            log.warn("Invalid story updating");
             throw new InvalidEntityUpdating("Invalid story updating");
         }
     }

@@ -21,6 +21,8 @@
     <title>Admin service</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+<%--    <style><c:import url="css/bootstrap.min.css"/>--%>
+<%--        <c:import url="css/service.css"/></style>--%>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

@@ -17,6 +17,7 @@ public class BacklogMapper {
     public Backlog mapBacklogEntityToBacklog(BacklogEntity entity) {
 //        return new Backlog(entity.getId(), entity.getProjectName(), entity.getDescription());
         return Backlog.builder()
+                .id(entity.getId())
                 .projectName(entity.getProjectName())
                 .description(entity.getDescription())
                 .build();

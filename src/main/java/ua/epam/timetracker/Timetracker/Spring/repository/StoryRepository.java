@@ -7,8 +7,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ua.epam.timetracker.Timetracker.Spring.domain.Status;
+import ua.epam.timetracker.Timetracker.Spring.entity.SprintEntity;
 import ua.epam.timetracker.Timetracker.Spring.entity.StoryEntity;
+import ua.epam.timetracker.Timetracker.Spring.entity.UserEntity;
+
 
 @Repository
 public interface StoryRepository extends JpaRepository<StoryEntity, Integer> {
@@ -22,15 +26,17 @@ public interface StoryRepository extends JpaRepository<StoryEntity, Integer> {
 
     Page<StoryEntity> findByUserIdIsNull(Pageable page);
 
-    long countByUserIdIsNotNull();
+    long countByUserIdIsNull();
 
     long countByUserId(Integer id);
 
     @Modifying
-    @Query("UPDATE StoryEntity e SET e.user = ?1 WHERE e.id = ?2")
-    void updateUserId(Integer userId, Integer storyId);
+    @Transactional
+    @Query("UPDATE StoryEntity e SET e.user = :user WHERE e.id = :id")
+    void updateUserId(@Param("user") UserEntity user, @Param("id") Integer storyId);
 
     @Modifying
-    @Query("UPDATE StoryEntity e SET e.sprint = ?1 WHERE e.id = ?2")
-    void updateSprintId(Integer sprintId, Integer storyId);
+    @Transactional
+    @Query("UPDATE StoryEntity e SET e.sprint = :sprint WHERE e.id = :id")
+    void updateSprintId(@Param("sprint") SprintEntity sprintId, @Param("id") Integer storyId);
 }

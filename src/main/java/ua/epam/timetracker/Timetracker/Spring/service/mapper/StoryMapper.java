@@ -22,7 +22,8 @@ public class StoryMapper {
 //                        .id(domain.getGoal().getId())
 //                        .build())
 //                .build();
-        return new StoryEntity(domain.getName(),domain.getSpentTime(),domain.getStatus(), new GoalEntity(domain.getGoal().getId()));
+        return new StoryEntity(domain.getName(),domain.getSpentTime(),domain.getStatus(),
+                new GoalEntity(domain.getGoal().getId()));
     }
 
     public StoryEntity mapStoryToStoryEntity(Story domain, User user) {

@@ -21,6 +21,7 @@ public class GoalMapper {
     public Goal mapGoalEntityToGoal(GoalEntity entity) {
 //        return new Goal(entity.getId(), entity.getName(), new Backlog(entity.getBacklog().getId()));
         return Goal.builder()
+                .id(entity.getId())
                 .name(entity.getName())
                 .backlog(Backlog.builder()
                         .id(entity.getBacklog().getId())

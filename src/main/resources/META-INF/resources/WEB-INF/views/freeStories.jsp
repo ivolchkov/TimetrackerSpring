@@ -55,11 +55,11 @@
                             <td>${stories.getStatus().getDescription()}</td>
                             <td>${stories.getGoal().getId()}</td>
                             <td class="nav-item text-nowrap">
-                                <form action="developer" method="post">
-                                    <input type="hidden" name="command" value="addStory"/>
-                                    <input type="hidden" name="storyId" value=${stories.getId()}>
-                                    <input type="hidden" name="currentPage" value=${currentPage}>
-                                    <input type="hidden" name="recordsPerPage" value=${recordsPerPage}>
+                                <form action="add-story" method="post">
+                                    <input type="hidden" name="userId" value="${sessionScope.get("user").id}">
+                                    <input type="hidden" name="storyId" value="${stories.getId()}">
+                                    <input type="hidden" name="currentPage" value="${currentPage}">
+                                    <input type="hidden" name="recordsPerPage" value="${recordsPerPage}">
                                     <button type="submit" class="btn btn-primary btn-block">
                                         <fmt:message key="service.developer.freeStories.take"/>
                                     </button>

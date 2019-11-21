@@ -16,19 +16,19 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="developer-service.jsp">
+                <a class="nav-link active" href="developer-service">
                     <span data-feather="home"></span>
                     <fmt:message key="service.admin.sideBar.home"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="developer?command=showFreeStories&currentPage=1&recordsPerPage=10">
+                <a class="nav-link" href="free-stories?currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.developer.sideBar.freeStories"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="developer?command=showDeveloperStories&currentPage=1&recordsPerPage=10">
+                <a class="nav-link" href="developer-stories?id=${sessionScope.get("user").id}&currentPage=1&recordsPerPage=10">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.developer.sideBar.yourStories"/>
                 </a>

@@ -1,6 +1,7 @@
 package ua.epam.timetracker.Timetracker.Spring.service.impl;
 
-import org.apache.log4j.Logger;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,23 +19,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Log4j
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 @Service
 public class SprintServiceImpl implements SprintService {
-    private static final Logger LOGGER = Logger.getLogger(SprintServiceImpl.class);
-
     private final SprintRepository sprintRepository;
     private final SprintMapper mapper;
-
-    @Autowired
-    public SprintServiceImpl(SprintRepository sprintRepository, SprintMapper mapper) {
-        this.sprintRepository = sprintRepository;
-        this.mapper = mapper;
-    }
 
     @Override
     public Sprint createSprint(Sprint sprint) {
         if (Objects.isNull(sprint) ) {
-            LOGGER.warn("Sprint is not valid");
+            log.warn("Sprint is not valid");
             throw new InvalidEntityCreation("Sprint is not valid");
         }
 
@@ -45,8 +40,8 @@ public class SprintServiceImpl implements SprintService {
 
     @Override
     public List<Sprint> showAllSprints(Integer currentPage, Integer recordsPerPage) {
-        if ( currentPage <= 0 || recordsPerPage <= 0 ) {
-            LOGGER.error("Invalid number of current page or records per page");
+        if ( currentPage < 0 || recordsPerPage < 0 ) {
+            log.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
         }
 
