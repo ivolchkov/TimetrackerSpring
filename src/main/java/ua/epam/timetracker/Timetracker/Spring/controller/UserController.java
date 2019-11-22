@@ -3,7 +3,6 @@ package ua.epam.timetracker.Timetracker.Spring.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.epam.timetracker.Timetracker.Spring.domain.Role;
@@ -11,10 +10,11 @@ import ua.epam.timetracker.Timetracker.Spring.domain.User;
 import ua.epam.timetracker.Timetracker.Spring.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@Controller
+@Controller("/user")
 public class UserController {
     private final UserService userService;
 
@@ -40,7 +40,7 @@ public class UserController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String repeatedPassword = request.getParameter("repeatedPassword");
-        Role role = Role.valueOf(request.getParameter("role"));
+        Role role = Role.valueOfName(request.getParameter("role"));
 
         if (!Objects.equals(password, repeatedPassword)) {
             return "register";
@@ -61,7 +61,6 @@ public class UserController {
 
     @PostMapping("/signIn")
     public String signIn(HttpServletRequest request) {
-        String page;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
@@ -71,24 +70,19 @@ public class UserController {
 
         switch (role) {
             case ADMIN:
-                page = "admin-service";
-                break;
+                return "admin-service";
             case DEVELOPER:
-                page = "developer-service";
-                break;
+                return "developer-service";
             case SCRUM_MASTER:
-                page = "scrum-master-service";
-                break;
+                return "scrum-master-service";
             default:
-                page = "index";
+                return "index";
         }
-
-        return page;
     }
 
     @GetMapping("/signOut")
-    public String signOut(HttpServletRequest request) {
-        request.getSession().invalidate();
+    public String signOut(HttpSession session) {
+        session.invalidate();
 
         return "index";
     }

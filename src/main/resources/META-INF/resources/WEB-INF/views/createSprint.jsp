@@ -38,8 +38,7 @@
             <!-- Material form contact -->
             <div class="row">
                 <div class="col-sm-6">
-                    <form class="text-center border border-light p-5" method="POST" action="scrum-master">
-                        <input type="hidden" name="command" value="createSprint"/>
+                    <form class="text-center border border-light p-5" method="POST" action="create-sprint">
 
                         <p class="h4 mb-4"><fmt:message key="createSprint.info"/></p>
 

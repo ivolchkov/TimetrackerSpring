@@ -9,13 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.epam.timetracker.Timetracker.Spring.domain.Story;
 import ua.epam.timetracker.Timetracker.Spring.domain.User;
-import ua.epam.timetracker.Timetracker.Spring.exception.InvalidPaginatingException;
 import ua.epam.timetracker.Timetracker.Spring.service.StoryService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @Controller("/developer")

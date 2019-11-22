@@ -129,7 +129,7 @@
         </div>
         <h2><fmt:message key="error.notFound"/></h2>
         <p><fmt:message key="error.message"/></p>
-        <a href="index.jsp"><fmt:message key="error.back"/></a>
+        <a href="index"><fmt:message key="error.back"/></a>
     </div>
 </div>
 

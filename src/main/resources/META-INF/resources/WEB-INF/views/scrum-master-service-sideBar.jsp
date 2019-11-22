@@ -16,31 +16,31 @@
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="scrum-master-service.jsp">
+                <a class="nav-link active" href="scrum-master-service">
                     <span data-feather="home"></span>
                     <fmt:message key="service.admin.sideBar.home"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="createProject.jsp">
+                <a class="nav-link" href="project">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.scrumMaster.sideBar.createProject"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="scrum-master?command=showAllBacklogs">
+                <a class="nav-link" href="all-backlogs">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.scrumMaster.sideBar.createGoal"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="scrum-master?command=showAllGoals">
+                <a class="nav-link" href="all-goals">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.scrumMaster.sideBar.createStory"/>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="createSprint.jsp">
+                <a class="nav-link" href="sprint">
                     <span data-feather="file-text"></span>
                     <fmt:message key="service.scrumMaster.sideBar.createSprint"/>
                 </a>

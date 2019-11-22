@@ -22,7 +22,7 @@ public class StoryMapper {
 //                        .id(domain.getGoal().getId())
 //                        .build())
 //                .build();
-        return new StoryEntity(domain.getName(),domain.getSpentTime(),domain.getStatus(),
+        return new StoryEntity(domain.getName(),domain.getSpentTime(),domain.getStatus(),domain.getDescription(),
                 new GoalEntity(domain.getGoal().getId()));
     }
 

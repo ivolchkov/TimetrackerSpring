@@ -34,13 +34,4 @@ public class User {
 
     @NotNull(message = "Please provide user role")
     private final Role role;
-
-//    public User(User user, String password) {
-//        this.id = null;
-//        this.name = user.name;
-//        this.surname = user.surname;
-//        this.email = user.email;
-//        this.password = password;
-//        this.role = user.role;
-//    }
 }

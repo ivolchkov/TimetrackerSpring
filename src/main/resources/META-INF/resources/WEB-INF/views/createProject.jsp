@@ -40,8 +40,7 @@
             <div class="col-sm-6">
                 <!--Card content-->
                 <div class="card-body px-lg-5 pt-0">
-                    <form class="text-center border border-light p-5" method="POST" action="scrum-master">
-                        <input type="hidden" name="command" value="createProject"/>
+                    <form class="text-center border border-light p-5" method="POST" action="create-backlog">
 
                         <p class="h4 mb-4"><fmt:message key="createProject.info"/></p>
 

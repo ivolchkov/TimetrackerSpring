@@ -25,7 +25,7 @@ public class AbstractPaginatingController {
     }
 
     void paginatingValidation(Integer currentPage, Integer recordsPerPage) {
-        if (Objects.isNull(currentPage) && Objects.isNull(recordsPerPage)) {
+        if (Objects.isNull(currentPage) || Objects.isNull(recordsPerPage)) {
             log.warn("Current page or records per page are invalid!");
             throw new InvalidPaginatingException("Current page or records per page are invalid!");
         }

@@ -1,5 +1,6 @@
 package ua.epam.timetracker.Timetracker.Spring.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.epam.timetracker.Timetracker.Spring.domain.Status;
@@ -42,10 +43,11 @@ public class StoryEntity {
     @JoinColumn(name = "sprint_id")
     private SprintEntity sprint;
 
-    public StoryEntity(String name, LocalTime spentTime, Status status, GoalEntity goal) {
+    public StoryEntity(String name, LocalTime spentTime, Status status, String description, GoalEntity goal) {
         this.name = name;
         this.spentTime = spentTime;
         this.status = status;
+        this.description = description;
         this.goal = goal;
     }
 

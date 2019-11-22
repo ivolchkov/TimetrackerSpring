@@ -1,6 +1,7 @@
 package ua.epam.timetracker.Timetracker.Spring.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import ua.epam.timetracker.Timetracker.Spring.service.*;
 
 import java.util.List;
 
+@Log4j
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @Controller("/admin")
 public class AdminController extends AbstractPaginatingController {
@@ -20,7 +22,7 @@ public class AdminController extends AbstractPaginatingController {
     private final SprintService sprintService;
     private final UserService userService;
 
-    @GetMapping(value = {"/admin-service"})
+    @GetMapping("/admin-service")
     public String main() {
         return "admin-service";
     }
@@ -29,7 +31,9 @@ public class AdminController extends AbstractPaginatingController {
     public ModelAndView projects(@RequestParam Integer currentPage, @RequestParam Integer recordsPerPage) {
         ModelAndView modelAndView = new ModelAndView();
 
+        log.info("Before validating");
         paginatingValidation(currentPage, recordsPerPage);
+        log.info("After validating");
         List<Backlog> backlogs = backlogService.showAllBacklogs(currentPage-1, recordsPerPage);
 
         modelAndView.addObject("backlogs", backlogs);

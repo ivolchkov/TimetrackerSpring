@@ -48,7 +48,7 @@
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="nav-link" href="index.jsp">Timetracker</a>
+                <a class="nav-link" href="index">Timetracker</a>
                 <a class="nav-link" href="#"><label><fmt:message key="main.nav.feature"/></label></a>
                 <a class="nav-link" href="#"><label><fmt:message key="main.nav.contact"/></label></a>
                 <a class="nav-link" href="login"><label><fmt:message key="main.nav.signIn"/></label></a>

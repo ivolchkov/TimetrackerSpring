@@ -44,8 +44,7 @@
             <!-- Material form contact -->
             <div class="row">
                 <div class="col-sm-6">
-                    <form class="text-center border border-light p-5" method="POST" action="scrum-master">
-                        <input type="hidden" name="command" value="createStory"/>
+                    <form class="text-center border border-light p-5" method="POST" action="create-story">
 
                         <p class="h4 mb-4"><fmt:message key="createStory.info"/></p>
 
