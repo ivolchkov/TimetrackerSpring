@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scrum master side ba</title>
+<body>
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/scrum-master-service}"
+                   th:text="#{service.admin.sideBar.home}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/project}"
+                   th:text="#{service.scrumMaster.sideBar.createProject}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/all-backlogs}"
+                   th:text="#{service.scrumMaster.sideBar.createGoal}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/all-goals}"
+                   th:text="#{service.scrumMaster.sideBar.createStory}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/sprint}"
+                   th:text="#{service.scrumMaster.sideBar.createSprint}">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script th:src="@{js/feather.min.js}"></script>
+<script>
+    feather.replace()
+</script>
+</body>
+</html>

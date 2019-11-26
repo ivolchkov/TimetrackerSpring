@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Registration form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+        body {
+            background: url("img/time.jpg") fixed;
+            background-size: cover;
+        }
+
+        *[role="form"] {
+            max-width: 530px;
+            padding: 15px;
+            margin: 0 auto;
+            border-radius: 0.3em;
+            background-color: #f2f2f2;
+        }
+
+        *[role="form"] h2 {
+            font-family: 'Open Sans' , sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            color: #000000;
+            margin-top: 5%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+    </style>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>--%>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container" style="padding-top:3%;">
+    <form class="form-horizontal" role="form" th:action="@{/signUp}" th:object="${user}" method="post">
+        <h2 th:text="#{registration.start}"></h2>
+        <div class="form-group">
+            <label for="firstName" class="col-sm-3 control-label" th:text="#{registration.name}"></label>
+            <div class="col-sm-9">
+                <label class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
+                <input type="text" id="firstName" th:filed="*{name}" name = "name" pattern="([A-Z])([a-z]{1,12})|([А-Я]([a-я]{1,12})" minlength="2" maxlength="15"
+                       th:placeholder="#{registration.inline.name}" class="form-control" autofocus required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName" class="col-sm-3 control-label" th:text="#{registration.surname}"></label>
+            <div class="col-sm-9">
+                <label class="text-danger" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></label>
+                <input type="text" id="lastName" th:filed="*{surname}" name = "surname" pattern="([A-Z])([a-z]{1,12})|([А-Я]([a-я]{1,12}))" minlength="2"
+                       maxlength="15" th:placeholder="#{registration.inline.surname}" class="form-control" autofocus required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" type="email" class="col-sm-3 control-label" th:text="#{registration.email}"></label>
+            <div class="col-sm-9">
+                <label class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
+                <input type="email" id="email" th:filed="*{email}" name = "email" th:placeholder="#{registration.inline.email}" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-3 control-label" th:text="#{registration.password}"></label>
+            <div class="col-sm-9">
+                <label class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
+                <input type="password" id = "password" name = "password"  th:filed="*{password}"
+                       required th:placeholder="#{registration.inline.password}" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$" class="form-control" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="repeatedPassword" class="col-sm-3 control-label" th:text="#{registration.repeatedPassword}"></label>
+            <div class="col-sm-9">
+                <label class="text-danger" th:if="${confirmationError == true}" th:text="#{register.confirmationError}"></label>
+                <input type="password" id="repeatedPassword" name = "repeatedPassword"
+                       required th:placeholder="#{registration.inline.password}"  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$" class="form-control" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" th:text="#{registration.role}"></label>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <label for="scrumRadio"></label><input type="radio" class="custom-control-input" id="scrumRadio" name = "role" value="SCRUM_MASTER">
+                            <label class="custom-control-label" for="scrumRadio" th:text="#{registration.role.scrumMaster}"></label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <label for="devRadio"></label><input type="radio" class="custom-control-input" id="devRadio" name = "role" value="DEVELOPER">
+                            <label class="custom-control-label" for="devRadio" th:text="#{registration.role.developer}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /.form-group -->
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3">
+                <span class="help-block" th:text="#{registration.required}"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" th:text="#{registration.submit}" ></button>
+    </form> <!-- /form -->
+</div> <!-- ./container -->
+</body>
+</html>
+

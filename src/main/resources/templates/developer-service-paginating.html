@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Admin service</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{css/service.css}" rel="stylesheet">
+<body>
+<nav aria-label="Navigation for countries" th:fragment="paginating">
+    <ul class="pagination">
+
+        <li class="page-item" th:if="${currentPage != 1}">
+            <a class="page-link"
+               th:href="@{${#httpServletRequest.requestURI}(id=${session.user.getId()}, currentPage=${currentPage-1}, recordsPerPage=${recordsPerPage})}"
+               th:text="#{service.paginating.prev}"></a>
+        </li>
+
+        <li class="page-item" th:classappend="${i eq currentPage} ? 'active'"
+            th:if="${numberOfPages != 0}" th:each="i : ${#numbers.sequence(1, numberOfPages)}">
+            <a class="page-link" th:href="@{${#httpServletRequest.requestURI}(id=${session.user.getId()}, currentPage=${i},
+             recordsPerPage=${recordsPerPage})}" th:text="${i}"></a>
+        </li>
+
+        <li class="page-item" th:if="${currentPage < numberOfPages}">
+            <a class="page-link" th:text="#{service.paginating.next}"
+               th:href="@{${#httpServletRequest.requestURI}(id=${session.user.getId()}, currentPage=${currentPage}+1, recordsPerPage=${recordsPerPage})}"></a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

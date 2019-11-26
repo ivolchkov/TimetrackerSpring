@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Scrum-master service</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{css/service.css}" rel="stylesheet">
+</head>
+
+<body>
+<div th:replace="service-header :: header"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="scrum-master-service-sideBar :: sidebar"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2" th:text="#{service.scrumMaster.sideBar.createGoal}"></h1>
+            </div>
+            <!-- Material form contact -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <!--Card content-->
+                    <div class="card-body px-lg-5 pt-0">
+                        <form class="text-center border border-light p-5" method="POST" th:action="@{/create-goal}"
+                              th:object="${goal}">
+
+                            <p class="h4 mb-4" th:text="#{createGoal.info}"></p>
+
+                            <!-- Name -->
+
+                            <label for="defaultContactFormName"></label>
+                            <label class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
+                            <input type="text" id="defaultContactFormName"
+                                   class="form-control mb-4"
+                                   name="name" required th:filed="*{name}"
+                                   th:placeholder="#{createGoal.name}"/>
+
+                            <p class="h6 mb-6" th:text="#{createGoal.backlogId}"></p>
+                            <label class="text-danger" th:if="${#fields.hasErrors('backlog')}" th:errors="*{backlog}"></label>
+                            <label>
+                                <select class="browser-default custom-select mb-4" name="backlogId" required>
+                                    <option value="" disabled selected th:text="#{createGoal.option}"></option>
+                                    <option th:value="${backlog.id}" th:each="backlog : ${backlogs}"
+                                            th:text="${backlog.projectName}"></option>
+                                </select>
+                            </label>
+
+                            <button class="btn btn-info btn-block" type="submit" th:text="#{createGoal.submit}">
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../assets/js/vendor/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+</body>
+</html>

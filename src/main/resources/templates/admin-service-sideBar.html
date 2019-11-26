@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin side bar</title>
+<body>
+<nav class="col-md-2 d-none d-md-block bg-light sidebar" th:fragment="sidebar">
+    <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/admin-service}"
+                   th:text="#{service.admin.sideBar.home}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/backlogs(currentPage=1, recordsPerPage=10)}"
+                   th:text="#{service.admin.sideBar.projects}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/goals(currentPage=1, recordsPerPage=10)}"
+                   th:text="#{service.admin.sideBar.goals}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/stories(currentPage=1, recordsPerPage=10)}"
+                   th:text="#{service.admin.sideBar.stories}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/sprints(currentPage=1, recordsPerPage=10)}"
+                  th:text="#{service.admin.sideBar.sprints}">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/users(currentPage=1, recordsPerPage=10)}"
+                   th:text="#{service.admin.sideBar.users}">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script th:src="@{js/feather.min.js}"></script>
+<script>
+    feather.replace()
+</script>
+</body>
+</html>

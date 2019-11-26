@@ -1204,10 +1204,7 @@
 			
 			var features = oSettings.oFeatures;
 			var loadedInit = function () {
-				/*
-				 * Sorting
-				 * @todo For modularisation (1.11) this needs to do into a sort start up handler
-				 */
+
 			
 				// If aaSorting is not defined, then we use the first indicator in asSorting
 				// in case that has been altered, so the default sort reflects that option
@@ -2896,10 +2893,6 @@
 	 *     row will be invalidated
 	 * @memberof DataTable#oApi
 	 *
-	 * @todo For the modularisation of v1.11 this will need to become a callback, so
-	 *   the sort and filter methods can subscribe to it. That will required
-	 *   initialisation options for sorting, which is why it is not already baked in
-	 */
 	function _fnInvalidate( settings, rowIdx, src, colIdx )
 	{
 		var row = settings.aoData[ rowIdx ];
