@@ -12,11 +12,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//.antMatchers("/**").permitAll()
-//                .antMatchers("/user/**").permitAll()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/developer/**").hasRole("DEVELOPER")
-//                .antMatchers("/scrum-master/**").hasRole("SCRUM_MASTER").anyRequest()
         http.
                 authorizeRequests()
                 .antMatchers("/**").permitAll() .anyRequest()
