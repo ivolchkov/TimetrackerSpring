@@ -10,8 +10,10 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Locale;
+import java.util.function.Function;
 
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
@@ -38,6 +40,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         final SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.ENGLISH);
         return slr;
+    }
+
+    @Bean
+    public Function<String, String> changeLanguage(){
+        return lang -> ServletUriComponentsBuilder.fromCurrentRequest().replaceQueryParam(lang).toUriString();
     }
 
     @Override
