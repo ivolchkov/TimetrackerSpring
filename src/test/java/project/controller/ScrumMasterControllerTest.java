@@ -54,7 +54,6 @@ public class ScrumMasterControllerTest {
     @MockBean
     private SprintService sprintService;
 
-
     @Test
     public void mainShouldReturnMainPage() throws Exception {
         mvc.perform(get("/" + MAIN_PAGE))
@@ -65,7 +64,7 @@ public class ScrumMasterControllerTest {
 
     @Test
     public void createBacklogShouldCreateBacklog() throws Exception {
-        Backlog backlog = Backlog.builder().id(1).projectName("Test").build();
+        Backlog backlog = createBacklog();
 
         when(backlogService.createBacklog(any(Backlog.class))).thenReturn(backlog);
 
@@ -82,8 +81,8 @@ public class ScrumMasterControllerTest {
 
     @Test
     public void createGoalShouldCreateGoal() throws Exception {
-        Goal goal = Goal.builder().id(1).name("Test").build();
-        Backlog backlog = Backlog.builder().id(1).projectName("Test").build();
+        Goal goal = createGoal();
+        Backlog backlog = createBacklog();
 
         when(goalService.createGoal(any(Goal.class))).thenReturn(goal);
         when(backlogService.showBacklogById(anyInt())).thenReturn(backlog);
@@ -124,7 +123,7 @@ public class ScrumMasterControllerTest {
     @Test
     public void createStoryShouldCreateStory() throws Exception {
         Story story = Story.builder().id(1).name("Test").build();
-        Goal goal = Goal.builder().id(1).name("Test").build();
+        Goal goal = createGoal();
 
         when(storyService.createStory(any(Story.class))).thenReturn(story);
         when(goalService.showGoalById(anyInt())).thenReturn(goal);
@@ -175,5 +174,13 @@ public class ScrumMasterControllerTest {
 
         verify(goalService).showNumberOfRows();
         verify(goalService).showAllGoals(anyInt(), anyInt());
+    }
+
+    private static Backlog createBacklog() {
+        return Backlog.builder().id(1).projectName("Test").build();
+    }
+
+    private static Goal createGoal() {
+        return Goal.builder().id(1).name("Test").build();
     }
 }
