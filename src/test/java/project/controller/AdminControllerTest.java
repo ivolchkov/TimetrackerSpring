@@ -59,6 +59,7 @@ public class AdminControllerTest {
         ModelAndView mav = mvc.perform(get("/backlogs")
                 .param("currentPage", "1")
                 .param("recordsPerPage", "10"))
+                .andExpect(view().name("showProjects"))
                 .andReturn().getModelAndView();
 
         Map<String, Object> model = Objects.requireNonNull(mav).getModel();
@@ -80,6 +81,7 @@ public class AdminControllerTest {
         ModelAndView mav = mvc.perform(get("/goals")
                 .param("currentPage", "1")
                 .param("recordsPerPage", "10"))
+                .andExpect(view().name("showGoals"))
                 .andReturn().getModelAndView();
 
         Map<String, Object> model = Objects.requireNonNull(mav).getModel();
@@ -101,6 +103,7 @@ public class AdminControllerTest {
         ModelAndView mav = mvc.perform(get("/stories")
                 .param("currentPage", "1")
                 .param("recordsPerPage", "10"))
+                .andExpect(view().name("showStories"))
                 .andReturn().getModelAndView();
 
         Map<String, Object> model = Objects.requireNonNull(mav).getModel();
@@ -122,6 +125,7 @@ public class AdminControllerTest {
         ModelAndView mav = mvc.perform(get("/users")
                 .param("currentPage", "1")
                 .param("recordsPerPage", "10"))
+                .andExpect(view().name("showUsers"))
                 .andReturn().getModelAndView();
 
         Map<String, Object> model = Objects.requireNonNull(mav).getModel();
@@ -143,6 +147,7 @@ public class AdminControllerTest {
         ModelAndView mav = mvc.perform(get("/sprints")
                 .param("currentPage", "1")
                 .param("recordsPerPage", "10"))
+                .andExpect(view().name("showSprints"))
                 .andReturn().getModelAndView();
 
         Map<String, Object> model = Objects.requireNonNull(mav).getModel();

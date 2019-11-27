@@ -2,7 +2,6 @@ package project.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +14,8 @@ import project.service.GoalService;
 import project.service.SprintService;
 import project.service.StoryService;
 
-
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-
-import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @Controller("/scrum-master")
