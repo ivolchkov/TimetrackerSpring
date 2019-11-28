@@ -8,11 +8,12 @@
 		<version>2.2.1.RELEASE</version>
 		<relativePath/>
 	</parent>
-	<groupId>project</groupId>
+
+	<groupId>ua.com.timetracker</groupId>
 	<artifactId>Time-tracker-thymeleaf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Time-tracker-thymeleaf</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Project about timetracking system using Scrum</description>
 
 	<properties>
 		<java.version>1.8</java.version>
