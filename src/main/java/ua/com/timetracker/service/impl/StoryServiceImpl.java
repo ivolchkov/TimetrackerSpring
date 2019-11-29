@@ -32,7 +32,6 @@ public class StoryServiceImpl implements StoryService {
     private final StoryMapper mapper;
 
     @Override
-    @Secured("SCRUM_MASTER")
     public Story createStory(Story story) {
         if (Objects.isNull(story)) {
             log.warn("Story is not valid");

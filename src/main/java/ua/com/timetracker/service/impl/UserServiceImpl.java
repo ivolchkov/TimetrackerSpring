@@ -69,7 +69,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Secured("ADMIN")
     public List<User> findAll(int currentPage, int recordsPerPage) {
         if (currentPage < 0 || recordsPerPage < 0) {
             log.warn("Invalid number of current page or records per page");
