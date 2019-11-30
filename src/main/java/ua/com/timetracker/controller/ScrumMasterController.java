@@ -18,9 +18,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@Controller("/scrum-master")
+@Controller
 public class ScrumMasterController {
-    private static final String MAIN_PAGE = "scrum-master-service";
+    private static final String MAIN_PAGE = "redirect:/scrum-master-service";
 
     private final BacklogService backlogService;
     private final GoalService goalService;
@@ -29,7 +29,7 @@ public class ScrumMasterController {
 
     @GetMapping("/scrum-master-service")
     public String main() {
-        return MAIN_PAGE;
+        return "scrum-master-service";
     }
 
     @GetMapping("/project")

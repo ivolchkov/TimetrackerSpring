@@ -5,11 +5,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.timetracker.configuration.LoginSuccessHandler;
+import ua.com.timetracker.configuration.SecurityConfiguration;
 import ua.com.timetracker.domain.User;
 import ua.com.timetracker.service.StoryService;
+import ua.com.timetracker.service.UserService;
 
 import java.util.Collections;
 import java.util.Map;
@@ -22,11 +26,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(DeveloperController.class)
+@WebMvcTest(value = DeveloperController.class, excludeAutoConfiguration = SecurityConfiguration.class)
+@WithMockUser(username="igorik@gmail.com", authorities="DEVELOPER")
 public class DeveloperControllerTest {
     private static final User USER = User.builder().id(1).build();
 
@@ -36,12 +40,11 @@ public class DeveloperControllerTest {
     @MockBean
     private StoryService storyService;
 
-    @Test
-    public void mainShouldReturnMainPage() throws Exception {
-        mvc.perform(get("/developer-service").sessionAttr("user", USER))
-                .andExpect(view().name("developer-service"))
-                .andExpect(status().isOk());
-    }
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private LoginSuccessHandler handler;
 
     @Test
     public void freeStoriesShouldShowFreeStories() throws Exception {
@@ -114,5 +117,4 @@ public class DeveloperControllerTest {
         verify(storyService).showStoriesWithoutUser(anyInt(), anyInt());
         verify(storyService).showNumberOfRowsWithoutUser();
     }
-
 }

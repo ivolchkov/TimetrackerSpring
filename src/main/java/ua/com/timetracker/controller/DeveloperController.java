@@ -2,6 +2,7 @@ package ua.com.timetracker.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,15 +12,20 @@ import ua.com.timetracker.domain.Story;
 import ua.com.timetracker.domain.User;
 import ua.com.timetracker.service.StoryService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@Controller("/developer")
+@Controller
 public class DeveloperController implements PaginationUtility {
     private final StoryService storyService;
 
-    @GetMapping(value = {"/developer-service"})
-    public String main() {
+    @GetMapping("/developer-service")
+    public String main(HttpSession session) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        session.setAttribute("user", user);
+
         return "developer-service";
     }
 

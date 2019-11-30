@@ -4,10 +4,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import ua.com.timetracker.configuration.LoginSuccessHandler;
 import ua.com.timetracker.domain.Role;
 import ua.com.timetracker.domain.User;
 import ua.com.timetracker.service.UserService;
@@ -30,6 +33,9 @@ public class UserControllerTest {
 
     @MockBean
     private UserService userService;
+
+    @MockBean
+    private LoginSuccessHandler handler;
 
     @Test
     public void mainShouldReturnMainPage() throws Exception {
@@ -73,16 +79,6 @@ public class UserControllerTest {
                 .andExpect(view().name("register"));
     }
 
-    @Test
-    public void signInShouldSignIn() throws Exception {
-        User user = createUser();
-        when(userService.login(anyString(), anyString())).thenReturn(user);
-
-        mvc.perform(post("/signIn")
-                .param("email", "igorik")
-                .param("password", "Vfkmdbyf1997"))
-                .andExpect(view().name("redirect:/developer-service"));
-    }
 
     private static User createUser() {
         return User.builder()

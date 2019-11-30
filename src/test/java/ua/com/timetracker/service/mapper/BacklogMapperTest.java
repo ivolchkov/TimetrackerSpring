@@ -5,6 +5,7 @@ import ua.com.timetracker.domain.Backlog;
 import ua.com.timetracker.entity.BacklogEntity;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BacklogMapperTest {
@@ -36,13 +37,13 @@ public class BacklogMapperTest {
     public void mapBacklogToBacklogEntityShouldReturnNull() {
         BacklogEntity actual = backlogMapper.mapBacklogToBacklogEntity(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     @Test
     public void mapBacklogEntityToBacklogShouldReturnNull() {
         Backlog actual = backlogMapper.mapBacklogEntityToBacklog(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 }

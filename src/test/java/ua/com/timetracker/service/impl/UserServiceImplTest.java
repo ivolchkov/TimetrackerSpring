@@ -10,6 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -97,46 +98,37 @@ public class UserServiceImplTest {
     }
 
     @Test
-    public void loginShouldLoginUser() {
+    public void loadUserByUsernameShouldLoginUser() {
         when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.of(USER_ENTITY));
-        when(encoder.matches("Babushka3529", "ENCODED")).thenReturn(true);
         when(mapper.mapUserEntityToUser(any(UserEntity.class))).thenReturn(USER);
 
-        User actual = userService.login("igorik@gmail.com", "Babushka3529");
+        UserDetails actual = userService.loadUserByUsername("igorik@gmail.com");
 
         verify(repository).findByEmail(anyString());
-        verify(encoder).matches(anyString(), anyString());
         verify(mapper).mapUserEntityToUser(any(UserEntity.class));
 
         assertThat(actual, is(USER));
     }
 
     @Test
-    public void loginShouldThrowUserNotFoundExceptionWithIncorrectPassword() {
+    public void loadUserByUsernameShouldThrowUserNotFoundExceptionWithNullEmail() {
         exception.expect(EntityNotFoundException.class);
-        exception.expectMessage("Incorrect password");
+        exception.expectMessage("Invalid e-mail type");
 
-        when(encoder.encode(anyString())).thenReturn("test");
-        when(repository.findByEmail("igorik@gmail.com")).thenReturn(Optional.of(USER_ENTITY));
+        userService.loadUserByUsername(null);
 
-        userService.login("igorik@gmail.com", "test");
-
-        verify(repository).findByEmail(anyString());
-        verify(encoder).encode(anyString());
     }
 
     @Test
-    public void loginShouldThrowUserNotFoundExceptionWithIncorrectEmail() {
+    public void loadUserByUsernameShouldThrowUserNotFoundExceptionWithIncorrectEmail() {
         exception.expect(EntityNotFoundException.class);
         exception.expectMessage("There is no user with this e-mail");
 
-        when(encoder.encode(anyString())).thenReturn("test");
         when(repository.findByEmail(anyString())).thenReturn(Optional.empty());
 
-        userService.login("igorik@gmail.com", "test");
+        userService.loadUserByUsername("igorik@gmail.com");
 
         verify(repository).findByEmail(anyString());
-        verify(encoder).encode(anyString());
     }
 
     @Test

@@ -7,6 +7,7 @@ import ua.com.timetracker.entity.SprintEntity;
 import java.time.LocalDate;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class SprintMapperTest {
@@ -43,14 +44,14 @@ public class SprintMapperTest {
     public void mapSprintToSprintEntityShouldReturnNull() {
         SprintEntity actual = sprintMapper.mapSprintToSprintEntity(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     @Test
     public void mapSprintEntityToSprintShouldReturnNull() {
         Sprint actual = sprintMapper.mapSprintEntityToSprint(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     private static Sprint getSprint() {

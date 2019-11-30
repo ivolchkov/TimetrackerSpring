@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import ua.com.timetracker.domain.Sprint;
 import ua.com.timetracker.domain.Status;

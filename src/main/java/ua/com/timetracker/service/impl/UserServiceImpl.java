@@ -5,7 +5,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.com.timetracker.domain.User;
@@ -52,7 +52,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String email, String password) {
+    public UserDetails loadUserByUsername(String email) {
+        if (Objects.isNull(email)) {
+            log.warn("Invalid e-mail type");
+            throw new EntityNotFoundException("Invalid e-mail type");
+        }
         Optional<UserEntity> entity = userRepository.findByEmail(email);
 
         if (!entity.isPresent()) {
@@ -60,12 +64,7 @@ public class UserServiceImpl implements UserService {
             throw new EntityNotFoundException("There is no user with this e-mail");
         }
 
-        if (encoder.matches(password, entity.get().getPassword())) {
-            return mapper.mapUserEntityToUser(entity.get());
-        }
-
-        log.warn("Incorrect password");
-        throw new EntityNotFoundException("Incorrect password");
+        return mapper.mapUserEntityToUser(entity.get());
     }
 
     @Override

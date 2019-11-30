@@ -6,17 +6,16 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.ModelAndView;
+import ua.com.timetracker.configuration.LoginSuccessHandler;
 import ua.com.timetracker.domain.Backlog;
 import ua.com.timetracker.domain.Goal;
 import ua.com.timetracker.domain.Sprint;
 import ua.com.timetracker.domain.Story;
-import ua.com.timetracker.service.BacklogService;
-import ua.com.timetracker.service.GoalService;
-import ua.com.timetracker.service.SprintService;
-import ua.com.timetracker.service.StoryService;
+import ua.com.timetracker.service.*;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -36,8 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ScrumMasterController.class)
+@WithMockUser(username="igorik@gmail.com", authorities="SCRUM_MASTER")
 public class ScrumMasterControllerTest {
-    private static final String MAIN_PAGE = "scrum-master-service";
+    private static final String MAIN_PAGE = "redirect:/scrum-master-service";
 
     @Autowired
     private MockMvc mvc;
@@ -54,10 +54,16 @@ public class ScrumMasterControllerTest {
     @MockBean
     private SprintService sprintService;
 
+    @MockBean
+    private UserService userService;
+
+    @MockBean
+    private LoginSuccessHandler handler;
+
     @Test
     public void mainShouldReturnMainPage() throws Exception {
-        mvc.perform(get("/" + MAIN_PAGE))
-                .andExpect(view().name(MAIN_PAGE))
+        mvc.perform(get("/scrum-master-service"))
+                .andExpect(view().name("scrum-master-service"))
                 .andExpect(status().isOk());
     }
 

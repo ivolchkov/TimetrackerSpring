@@ -10,6 +10,7 @@ import ua.com.timetracker.entity.UserEntity;
 import java.time.LocalTime;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StoryMapperTest {
@@ -71,28 +72,28 @@ public class StoryMapperTest {
     public void mapStoryToStoryEntityShouldReturnNull() {
         StoryEntity actual = storyMapper.mapStoryToStoryEntity(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     @Test
     public void mapStoryEntityToStoryShouldReturnNull() {
         Story actual = storyMapper.mapStoryEntityToStory(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     @Test
     public void mapStoryToStoryEntityShouldReturnNullWithUser() {
         StoryEntity actual = storyMapper.mapStoryToStoryEntity(null, USER);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     @Test
     public void mapStoryEntityToStoryShouldReturnNullWithSprint() {
         StoryEntity actual = storyMapper.mapStoryToStoryEntity(null, SPRINT);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     private static StoryEntity getStoryEntity() {

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Log4j
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@Controller("/admin")
+@Controller
 public class AdminController implements PaginationUtility {
     private final BacklogService backlogService;
     private final GoalService goalService;

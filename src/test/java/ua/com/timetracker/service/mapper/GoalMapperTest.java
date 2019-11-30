@@ -6,7 +6,8 @@ import ua.com.timetracker.domain.Goal;
 import ua.com.timetracker.entity.BacklogEntity;
 import ua.com.timetracker.entity.GoalEntity;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GoalMapperTest {
@@ -20,8 +21,8 @@ public class GoalMapperTest {
     public void mapGoalToGoalEntityShouldMapToEntity() {
         GoalEntity actual = goalMapper.mapGoalToGoalEntity(GOAL);
 
-        assertThat(actual.getName(), equalTo(GOAL_ENTITY.getName()));
-        assertThat(actual.getBacklog(), equalTo(GOAL_ENTITY.getBacklog()));
+        assertThat(actual.getName(), is(GOAL_ENTITY.getName()));
+        assertThat(actual.getBacklog(), is(GOAL_ENTITY.getBacklog()));
     }
 
     @Test
@@ -29,22 +30,22 @@ public class GoalMapperTest {
         GOAL_ENTITY.setId(1);
         Goal actual = goalMapper.mapGoalEntityToGoal(GOAL_ENTITY);
 
-        assertThat(actual.getId(), equalTo(GOAL.getId()));
-        assertThat(actual.getName(), equalTo(GOAL.getName()));
-        assertThat(actual.getBacklog(), equalTo(GOAL.getBacklog()));
+        assertThat(actual.getId(), is(GOAL.getId()));
+        assertThat(actual.getName(), is(GOAL.getName()));
+        assertThat(actual.getBacklog(), is(GOAL.getBacklog()));
     }
 
     @Test
     public void mapGoalToGoalEntityShouldReturnNull() {
         GoalEntity actual = goalMapper.mapGoalToGoalEntity(null);
 
-        assertThat(actual, equalTo(null));
+        assertThat(actual, is(nullValue()));
     }
 
     @Test
     public void mapGoalEntityToGoalShouldReturnNull() {
         Goal actual = goalMapper.mapGoalEntityToGoal(null);
 
-        assertThat(actual, equalTo(null));
+        assertThat(actual, is(nullValue()));
     }
 }

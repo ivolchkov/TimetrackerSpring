@@ -6,6 +6,7 @@ import ua.com.timetracker.domain.User;
 import ua.com.timetracker.entity.UserEntity;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class UserMapperTest {
@@ -43,14 +44,14 @@ public class UserMapperTest {
     public void mapUserToUserEntityShouldReturnNull() {
         UserEntity actual = userMapper.mapUserToUserEntity(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     @Test
     public void mapUserEntityToUserShouldReturnNull() {
         User actual = userMapper.mapUserEntityToUser(null);
 
-        assertThat(actual, is(null));
+        assertThat(actual, is(nullValue()));
     }
 
     private static UserEntity getUserEntity() {
