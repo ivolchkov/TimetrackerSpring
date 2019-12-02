@@ -33,5 +33,4 @@ public class RoleTest {
 
         Role.valueOfName("test");
     }
-
 }

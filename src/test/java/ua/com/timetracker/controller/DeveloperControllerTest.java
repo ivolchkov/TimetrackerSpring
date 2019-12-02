@@ -70,30 +70,6 @@ public class DeveloperControllerTest {
     }
 
     @Test
-    public void developerStoriesShouldShowDeveloperStories() throws Exception {
-        when(storyService.showStoryByUser(anyInt(), anyInt(), anyInt())).thenReturn(Collections.emptyList());
-        when(storyService.showNumberOfRowsByUserId(anyInt())).thenReturn(20L);
-
-        ModelAndView mav = mvc.perform(get("/developer-stories")
-                .param("id", "1")
-                .param("currentPage", "1")
-                .param("recordsPerPage", "10")
-                .sessionAttr("user", USER))
-                .andExpect(view().name("showDeveloperStories"))
-                .andReturn().getModelAndView();
-
-        Map<String, Object> model = Objects.requireNonNull(mav).getModel();
-
-        assertThat(model.get("stories"), is(Collections.emptyList()));
-        assertThat(model.get("currentPage"), is(1));
-        assertThat(model.get("recordsPerPage"), is(10));
-        assertThat(model.get("numberOfPages"), is(2L));
-
-        verify(storyService).showNumberOfRowsByUserId(anyInt());
-        verify(storyService).showStoryByUser(anyInt(), anyInt(), anyInt());
-    }
-
-    @Test
     public void addStoryShouldAddStory() throws Exception {
         when(storyService.showStoriesWithoutUser(anyInt(), anyInt())).thenReturn(Collections.emptyList());
         when(storyService.showNumberOfRowsWithoutUser()).thenReturn(20L);
