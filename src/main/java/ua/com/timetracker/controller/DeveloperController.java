@@ -45,17 +45,18 @@ public class DeveloperController implements PaginationUtility {
     }
 
     @GetMapping("/developer-stories")
-    public ModelAndView developerStories(@RequestParam Integer id, @RequestParam Integer currentPage,
+    public ModelAndView developerStories(@RequestParam Integer currentPage,
                                          @RequestParam Integer recordsPerPage) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         ModelAndView modelAndView = new ModelAndView();
 
         paginatingValidation(currentPage, recordsPerPage);
-        List<Story> stories = storyService.showStoryByUser(id, currentPage-1, recordsPerPage);
+        List<Story> stories = storyService.showStoryByUser(user.getId(), currentPage-1, recordsPerPage);
 
         modelAndView.addObject("stories", stories);
 
         paginating(currentPage, recordsPerPage, modelAndView,
-                "showDeveloperStories", storyService.showNumberOfRowsByUserId(id));
+                "showDeveloperStories", storyService.showNumberOfRowsByUserId(user.getId()));
 
         return modelAndView;
     }

@@ -17,7 +17,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/developer-stories(id=${session.user.getId()}, currentPage=1, recordsPerPage=10)}"
+                <a class="nav-link" th:href="@{/developer-stories(currentPage=1, recordsPerPage=10)}"
                    th:text="#{service.developer.sideBar.yourStories}">
                 </a>
             </li>

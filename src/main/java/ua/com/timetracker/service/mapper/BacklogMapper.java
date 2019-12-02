@@ -9,8 +9,8 @@ import java.util.Objects;
 @Component
 public class BacklogMapper {
     public BacklogEntity mapBacklogToBacklogEntity(Backlog domain) {
-        return Objects.isNull(domain) ? null : new BacklogEntity(domain.getProjectName(),
-                domain.getDescription());
+        return Objects.isNull(domain) ? null :
+                new BacklogEntity(domain.getProjectName(), domain.getDescription());
     }
 
     public Backlog mapBacklogEntityToBacklog(BacklogEntity entity) {

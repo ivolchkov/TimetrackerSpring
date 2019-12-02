@@ -40,6 +40,9 @@
 <div class="container" style="padding-top:3%;">
     <form class="form-horizontal" role="form" th:action="@{/signUp}" th:object="${user}" method="post">
         <h2 th:text="#{registration.start}"></h2>
+        <label th:if="${param.registerError != null}">
+            <label class="text-danger" th:if="${param.registerError.contains('true')}" th:text="#{register.errorMessage}"></label>
+        </label>
         <div class="form-group">
             <label for="firstName" class="col-sm-3 control-label" th:text="#{registration.name}"></label>
             <div class="col-sm-9">

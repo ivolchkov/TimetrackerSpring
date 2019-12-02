@@ -30,9 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public ModelAndView register() {
-        ModelAndView mav = new ModelAndView();
-
+    public ModelAndView register(ModelAndView mav) {
         mav.addObject("user", new User());
         mav.setViewName("register");
 

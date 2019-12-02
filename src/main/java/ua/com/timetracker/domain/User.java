@@ -34,10 +34,10 @@ public class User implements UserDetails {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{5,15}$", message = "Password must be longer " +
             "than 5 characters and consist at least 1 upper case character, and at least 1 number")
     @NotEmpty(message = "Please provide user password")
-    @Setter(AccessLevel.PUBLIC) private String password;
+    private String password;
 
     @NotNull(message = "Please provide user role")
-    @Setter(AccessLevel.PUBLIC) private Role role;
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -2,6 +2,8 @@ package ua.com.timetracker.controller;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+import ua.com.timetracker.domain.User;
 import ua.com.timetracker.exception.*;
 
 import java.sql.SQLException;
@@ -15,18 +17,17 @@ public class ExceptionHandlerController {
             InvalidPaginatingException.class,
             IllegalArgumentException.class,
             Throwable.class})
-    public String handleSQLException() {
+    public String handleException() {
         return "error-spring";
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public String handleEntityNotFoundException() {
-        return "sign-in";
-    }
-
     @ExceptionHandler({AlreadyRegisteredException.class, InvalidRegistrationException.class})
-    public String handleRegisteredException() {
-        return "register";
+    public ModelAndView handleRegisteredException() {
+        ModelAndView modelAndView = new ModelAndView("redirect:/register");
+        modelAndView.addObject("registerError", true);
+        modelAndView.addObject("user", new User());
+
+        return modelAndView;
     }
 
 }

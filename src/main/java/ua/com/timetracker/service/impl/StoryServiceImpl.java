@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ua.com.timetracker.domain.Sprint;
-import ua.com.timetracker.domain.Status;
 import ua.com.timetracker.domain.Story;
 import ua.com.timetracker.domain.User;
 import ua.com.timetracker.entity.StoryEntity;
@@ -43,30 +41,6 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public List<Story> showStoryByStatus(Status status, int currentPage, int recordsPerPage) {
-        validateParam(status);
-        paginatingValidation(currentPage, recordsPerPage);
-
-        PageRequest pageRequest = PageRequest.of(currentPage, recordsPerPage);
-
-        return storyRepository.findByStatus(status, pageRequest).stream()
-                .map(mapper::mapStoryEntityToStory)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Story> showStoryByGoal(Integer goalId, int currentPage, int recordsPerPage) {
-        validateParam(goalId);
-        paginatingValidation(currentPage, recordsPerPage);
-
-        PageRequest pageRequest = PageRequest.of(currentPage, recordsPerPage);
-
-        return storyRepository.findByGoalId(goalId, pageRequest).stream()
-                .map(mapper::mapStoryEntityToStory)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<Story> showStoryByUser(Integer userId, int currentPage, int recordsPerPage) {
         validateParam(userId);
         paginatingValidation(currentPage, recordsPerPage);
@@ -74,18 +48,6 @@ public class StoryServiceImpl implements StoryService {
         PageRequest pageRequest = PageRequest.of(currentPage, recordsPerPage);
 
         return storyRepository.findByUserId(userId, pageRequest).stream()
-                .map(mapper::mapStoryEntityToStory)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Story> showStoryBySprint(Integer sprintId, int currentPage, int recordsPerPage) {
-        validateParam(sprintId);
-        paginatingValidation(currentPage, recordsPerPage);
-
-        PageRequest pageRequest = PageRequest.of(currentPage, recordsPerPage);
-
-        return storyRepository.findBySprintId(sprintId, pageRequest).stream()
                 .map(mapper::mapStoryEntityToStory)
                 .collect(Collectors.toList());
     }
@@ -134,15 +96,6 @@ public class StoryServiceImpl implements StoryService {
         StoryEntity entity = mapper.mapStoryToStoryEntity(story, user);
 
         storyRepository.updateUserId(entity.getUser(), entity.getId());
-    }
-
-    @Override
-    public void addStoryToSprint(Story story, Sprint sprint) {
-        validateUpdateParam(story, sprint);
-
-        StoryEntity entity = mapper.mapStoryToStoryEntity(story, sprint);
-
-        storyRepository.updateSprintId(entity.getSprint(), entity.getId());
     }
 
     private <T> void validateParam(T param) {

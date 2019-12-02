@@ -16,5 +16,5 @@ public class Goal {
     @NotEmpty(message = "Please provide goal name")
     private String name;
 
-    @Setter(AccessLevel.PUBLIC) private Backlog backlog;
+    private Backlog backlog;
 }

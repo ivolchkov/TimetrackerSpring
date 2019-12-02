@@ -1,9 +1,11 @@
 package ua.com.timetracker.service.mapper;
 
 import org.junit.Test;
-import ua.com.timetracker.domain.*;
+import ua.com.timetracker.domain.Goal;
+import ua.com.timetracker.domain.Status;
+import ua.com.timetracker.domain.Story;
+import ua.com.timetracker.domain.User;
 import ua.com.timetracker.entity.GoalEntity;
-import ua.com.timetracker.entity.SprintEntity;
 import ua.com.timetracker.entity.StoryEntity;
 import ua.com.timetracker.entity.UserEntity;
 
@@ -16,13 +18,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class StoryMapperTest {
     private static final User USER = User.builder().id(1).build();
 
-    private static final Sprint SPRINT = Sprint.builder().id(1).build();
-
     private static final StoryEntity STORY_ENTITY = getStoryEntity();
 
     private static final StoryEntity ENTITY_WITH_USER = new StoryEntity(1, new UserEntity(1));
-
-    private static final StoryEntity ENTITY_WITH_SPRINT = new StoryEntity(1, new SprintEntity(1));
 
     private static final Story DOMAIN = getStory();
 
@@ -61,14 +59,6 @@ public class StoryMapperTest {
     }
 
     @Test
-    public void mapStoryToStoryEntityShouldMapToEntityWithSprint() {
-        StoryEntity actual = storyMapper.mapStoryToStoryEntity(DOMAIN, SPRINT);
-
-        assertThat(actual.getId(), is(ENTITY_WITH_SPRINT.getId()));
-        assertThat(actual.getSprint(), is(ENTITY_WITH_SPRINT.getSprint()));
-    }
-
-    @Test
     public void mapStoryToStoryEntityShouldReturnNull() {
         StoryEntity actual = storyMapper.mapStoryToStoryEntity(null);
 
@@ -85,13 +75,6 @@ public class StoryMapperTest {
     @Test
     public void mapStoryToStoryEntityShouldReturnNullWithUser() {
         StoryEntity actual = storyMapper.mapStoryToStoryEntity(null, USER);
-
-        assertThat(actual, is(nullValue()));
-    }
-
-    @Test
-    public void mapStoryEntityToStoryShouldReturnNullWithSprint() {
-        StoryEntity actual = storyMapper.mapStoryToStoryEntity(null, SPRINT);
 
         assertThat(actual, is(nullValue()));
     }

@@ -82,67 +82,6 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void showStoryByStatusShouldShowAllStoriesByStatus() {
-        when(repository.findByStatus(any(Status.class), any(PageRequest.class))).thenReturn(STORY_ENTITIES);
-        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
-
-        List<Story> actual = service.showStoryByStatus(Status.TO_DO, 1 , 1);
-
-        assertThat(actual, is(STORIES));
-    }
-
-    @Test
-    public void showStoryByStatusShouldReturnEmptyListSearchingByStatus() {
-        when(repository.findByStatus(any(Status.class), any(PageRequest.class))).thenReturn(Page.empty());
-
-        List<Story> actual = service.showStoryByStatus(Status.TO_DO, 1 , 1);
-
-        verify(repository).findByStatus(any(Status.class), any(PageRequest.class));
-
-        assertThat(actual, is(Collections.emptyList()));
-    }
-
-    @Test
-    public void showStoryByStatusShouldThrowIllegalArgumentExceptionWithNullStatus() {
-        exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("Parameter is not valid");
-
-        service.showStoryByStatus(null , 1, 1);
-    }
-
-    @Test
-    public void showStoryByGoalShouldShowAllStoriesByGoal() {
-        when(repository.findByGoalId(any(Integer.class), any(PageRequest.class))).thenReturn(STORY_ENTITIES);
-        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
-
-        List<Story> actual = service.showStoryByGoal(1, 1, 1);
-
-        verify(repository).findByGoalId(any(Integer.class), any(PageRequest.class));
-        verify(mapper, times(2)).mapStoryEntityToStory(any(StoryEntity.class));
-
-        assertThat(actual, is(STORIES));
-    }
-
-    @Test
-    public void showStoryByGoalShouldReturnEmptyListSearchingByGoal() {
-        when(repository.findByGoalId(any(Integer.class), any(PageRequest.class))).thenReturn(Page.empty());
-
-        List<Story> actual = service.showStoryByGoal(1,1, 1);
-
-        verify(repository).findByGoalId(any(Integer.class), any(PageRequest.class));
-
-        assertThat(actual, is(Collections.emptyList()));
-    }
-
-    @Test
-    public void showStoryByGoalShouldThrowIllegalArgumentExceptionWithNullGoalId() {
-        exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("Parameter is not valid");
-
-        service.showStoryByGoal(null, 1, 1);
-    }
-
-    @Test
     public void showStoryByUserShouldShowAllStoriesByUser() {
         when(repository.findByUserId(any(Integer.class), any(PageRequest.class))).thenReturn(STORY_ENTITIES);
         when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
@@ -175,51 +114,11 @@ public class StoryServiceImplTest {
     }
 
     @Test
-    public void showStoryBySprintShouldShowAllStoriesBySprint() {
-        when(repository.findBySprintId(any(Integer.class), any(PageRequest.class))).thenReturn(STORY_ENTITIES);
-        when(mapper.mapStoryEntityToStory(any(StoryEntity.class))).thenReturn(STORY);
-
-        List<Story> actual = service.showStoryBySprint(1,1,1);
-
-        verify(repository).findBySprintId(any(Integer.class), any(PageRequest.class));
-        verify(mapper, times(2)).mapStoryEntityToStory(any(StoryEntity.class));
-
-        assertThat(actual, is(STORIES));
-    }
-
-    @Test
-    public void showStoryBySprintShouldReturnEmptyListSearchingBySprint() {
-        when(repository.findBySprintId(any(Integer.class), any(PageRequest.class))).thenReturn(Page.empty());
-
-        List<Story> actual = service.showStoryBySprint(1,1,1);
-
-        verify(repository).findBySprintId(any(Integer.class), any(PageRequest.class));
-
-        assertThat(actual, is(Collections.emptyList()));
-    }
-
-    @Test
-    public void showStoryBySprintShouldThrowIllegalArgumentExceptionWithNullSprintId() {
-        exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("Parameter is not valid");
-
-        service.showStoryBySprint(null,1,1);
-    }
-
-    @Test
     public void addStoryToUserShouldThrowIllegalArgumentExceptionAddingStoryToUser() {
         exception.expect(InvalidEntityUpdating.class);
         exception.expectMessage("Invalid story updating");
 
         service.addStoryToUser(STORY, null);
-    }
-
-    @Test
-    public void addStoryToSprintShouldThrowIllegalArgumentExceptionAddingStoryToSprint() {
-        exception.expect(InvalidEntityUpdating.class);
-        exception.expectMessage("Invalid story updating");
-
-        service.addStoryToSprint(STORY, null);
     }
 
     @Test

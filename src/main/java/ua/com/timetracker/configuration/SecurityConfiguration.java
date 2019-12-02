@@ -30,15 +30,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/signIn", "/index", "/", "/login", "/register", "/signUp").permitAll()
-                .antMatchers("/admin-service", "/backlogs", "/goals", "/stories",
-                        "/users", "/sprints").hasAnyAuthority("ADMIN")
-                .antMatchers("/developer-service", "/free-stories",
-                        "/developer-stories", "/add-story").hasAnyAuthority("DEVELOPER")
-                .antMatchers("/scrum-master-service", "/project", "/sprint", "/create-backlog", "/create-goal",
-                        "/create-sprint", "/create-story", "/all-backlogs", "/all-goals").hasAnyAuthority("SCRUM_MASTER").anyRequest()
+                .antMatchers("/",
+                        "/index",
+                        "/signIn",
+                        "/login",
+                        "/register",
+                        "/signUp").permitAll()
+                .antMatchers("/admin-service",
+                        "/backlogs",
+                        "/goals",
+                        "/stories",
+                        "/users",
+                        "/sprints").hasAnyAuthority("ADMIN")
+                .antMatchers("/developer-service",
+                        "/free-stories",
+                        "/developer-stories",
+                        "/add-story").hasAnyAuthority("DEVELOPER")
+                .antMatchers("/scrum-master-service",
+                        "/project",
+                        "/sprint",
+                        "/create-backlog",
+                        "/create-goal",
+                        "/create-sprint",
+                        "/create-story",
+                        "/all-backlogs",
+                        "/all-goals").hasAnyAuthority("SCRUM_MASTER").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("/spring-error").successHandler(handler).permitAll()
+                .loginPage("/login").failureUrl("/login?loginError=true").successHandler(handler).permitAll()
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()

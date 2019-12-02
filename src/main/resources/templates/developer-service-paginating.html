@@ -21,19 +21,19 @@
 
         <li class="page-item" th:if="${currentPage != 1}">
             <a class="page-link"
-               th:href="@{${#httpServletRequest.requestURI}(id=${session.user.getId()}, currentPage=${currentPage-1}, recordsPerPage=${recordsPerPage})}"
+               th:href="@{${#httpServletRequest.requestURI}(currentPage=${currentPage-1}, recordsPerPage=${recordsPerPage})}"
                th:text="#{service.paginating.prev}"></a>
         </li>
 
         <li class="page-item" th:classappend="${i eq currentPage} ? 'active'"
             th:if="${numberOfPages != 0}" th:each="i : ${#numbers.sequence(1, numberOfPages)}">
-            <a class="page-link" th:href="@{${#httpServletRequest.requestURI}(id=${session.user.getId()}, currentPage=${i},
+            <a class="page-link" th:href="@{${#httpServletRequest.requestURI}(currentPage=${i},
              recordsPerPage=${recordsPerPage})}" th:text="${i}"></a>
         </li>
 
         <li class="page-item" th:if="${currentPage < numberOfPages}">
             <a class="page-link" th:text="#{service.paginating.next}"
-               th:href="@{${#httpServletRequest.requestURI}(id=${session.user.getId()}, currentPage=${currentPage}+1, recordsPerPage=${recordsPerPage})}"></a>
+               th:href="@{${#httpServletRequest.requestURI}(currentPage=${currentPage}+1, recordsPerPage=${recordsPerPage})}"></a>
         </li>
     </ul>
 </nav>

@@ -8,21 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.timetracker.domain.Status;
-import ua.com.timetracker.entity.SprintEntity;
 import ua.com.timetracker.entity.StoryEntity;
 import ua.com.timetracker.entity.UserEntity;
 
 
 @Repository
 public interface StoryRepository extends JpaRepository<StoryEntity, Integer> {
-    Page<StoryEntity> findByStatus(Status status, Pageable page);
-
-    Page<StoryEntity> findByGoalId(Integer id, Pageable page);
-
     Page<StoryEntity> findByUserId(Integer id, Pageable page);
-
-    Page<StoryEntity> findBySprintId(Integer id, Pageable page);
 
     Page<StoryEntity> findByUserIdIsNull(Pageable page);
 
@@ -34,9 +26,4 @@ public interface StoryRepository extends JpaRepository<StoryEntity, Integer> {
     @Transactional()
     @Query("UPDATE StoryEntity e SET e.user = :user WHERE e.id = :id")
     void updateUserId(@Param("user") UserEntity user, @Param("id") Integer storyId);
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE StoryEntity e SET e.sprint = :sprint WHERE e.id = :id")
-    void updateSprintId(@Param("sprint") SprintEntity sprintId, @Param("id") Integer storyId);
 }
