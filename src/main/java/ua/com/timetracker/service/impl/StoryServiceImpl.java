@@ -42,14 +42,16 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public List<Story> showStoryByUser(Integer userId, int currentPage, int recordsPerPage) {
-        validateParam(userId);
+        if (Objects.isNull(userId)) {
+            log.warn("User id is not valid");
+            throw new IllegalArgumentException("User id is not valid");
+        }
         paginatingValidation(currentPage, recordsPerPage);
 
         PageRequest pageRequest = PageRequest.of(currentPage, recordsPerPage);
-
-        return storyRepository.findByUserId(userId, pageRequest).stream()
-                .map(mapper::mapStoryEntityToStory)
-                .collect(Collectors.toList());
+        Page<StoryEntity> result = storyRepository.findByUserId(userId, pageRequest);
+        
+        return listMapping(result);
     }
 
     @Override
@@ -91,31 +93,20 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public void addStoryToUser(Story story, User user) {
-        validateUpdateParam(story, user);
+        if (Objects.isNull(story) || Objects.isNull(user)) {
+            log.warn("Invalid story updating");
+            throw new InvalidEntityUpdating("Invalid story updating");
+        }
 
         StoryEntity entity = mapper.mapStoryToStoryEntity(story, user);
 
         storyRepository.updateUserId(entity.getUser(), entity.getId());
     }
 
-    private <T> void validateParam(T param) {
-        if (Objects.isNull(param)) {
-            log.warn("Parameter is not valid");
-            throw new IllegalArgumentException("Parameter is not valid");
-        }
-    }
-
     private void paginatingValidation(int currentPage, int recordsPerPage) {
         if (currentPage < 0 || recordsPerPage < 0) {
             log.error("Invalid number of current page or records per page");
             throw new InvalidPaginatingException("Invalid number of current page or records per page");
-        }
-    }
-
-    private <T> void validateUpdateParam(Story story, T param) {
-        if (Objects.isNull(story) || Objects.isNull(param)) {
-            log.warn("Invalid story updating");
-            throw new InvalidEntityUpdating("Invalid story updating");
         }
     }
 

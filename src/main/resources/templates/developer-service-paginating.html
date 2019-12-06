@@ -26,7 +26,7 @@
         </li>
 
         <li class="page-item" th:classappend="${i eq currentPage} ? 'active'"
-            th:if="${numberOfPages != 0}" th:each="i : ${#numbers.sequence(1, numberOfPages)}">
+            th:if="${numberOfPages gt 1}" th:each="i : ${#numbers.sequence(1, numberOfPages)}">
             <a class="page-link" th:href="@{${#httpServletRequest.requestURI}(currentPage=${i},
              recordsPerPage=${recordsPerPage})}" th:text="${i}"></a>
         </li>
